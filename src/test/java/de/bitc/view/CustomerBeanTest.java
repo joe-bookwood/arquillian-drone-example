@@ -24,6 +24,8 @@ import de.bitc.model.Customer;
 public class CustomerBeanTest {
 
     private static final String WEBAPP_SRC = "src/main/webapp";
+    private static final String WEBAPP_SRC_CUSTOMER = "src/main/webapp/customer";
+    private static final String WEBAPP_SRC_TEMPLATE = "src/main/webapp/resources/scaffold";
     private static final String WEBAPP_TEST_SRC = "src/test/webapp";
 
     @Inject
@@ -39,8 +41,9 @@ public class CustomerBeanTest {
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "web-test.war")
                 .addClasses(CustomerBean.class, Customer.class)
-                .addAsManifestResource("META-INF/persistence.xml", "META-INF/persistence.xml")
-                .addAsWebResource(new File(WEBAPP_SRC, "index.html"))
+                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                .addAsWebResource(new File(WEBAPP_SRC_CUSTOMER, "search.xhtml"))
+                .addAsWebResource(new File(WEBAPP_SRC_TEMPLATE, "pageTemplate.xhtml"))
                 .addAsWebInfResource(new StringAsset("<faces-config version=\"2.2\"/>"), "faces-config.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
