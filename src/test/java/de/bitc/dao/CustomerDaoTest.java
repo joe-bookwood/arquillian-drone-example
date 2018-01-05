@@ -22,7 +22,7 @@ public class CustomerDaoTest {
 	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap
-				.create(JavaArchive.class)
+				.create(JavaArchive.class,"dao-test.jar")
 				.addClasses(CustomerDao.class,Customer.class)
 				.addAsManifestResource("META-INF/persistence.xml",
 						"persistence.xml")
