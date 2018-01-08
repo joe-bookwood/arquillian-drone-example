@@ -1,9 +1,9 @@
 package de.bitc.view;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.net.URL;
-
-import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
@@ -13,7 +13,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -21,21 +20,19 @@ import org.openqa.selenium.WebDriver;
 import de.bitc.model.Customer;
 
 @RunWith(Arquillian.class)
-public class CustomerBeanTest {
+public class CustomerWebTest {
 
     private static final String WEBAPP_SRC = "src/main/webapp";
     private static final String WEBAPP_SRC_CUSTOMER = "src/main/webapp/customer";
     private static final String WEBAPP_SRC_TEMPLATE = "src/main/webapp/resources/scaffold";
     private static final String WEBAPP_TEST_SRC = "src/test/webapp";
 
-    @Inject
-    private CustomerBean customerBean;
 
-    @Drone
-    private WebDriver browser;
+	@Drone
+	private WebDriver browser;
 
-    @ArquillianResource
-    private URL deploymentUrl;
+	@ArquillianResource
+	private URL deploymentUrl;
 
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
@@ -49,7 +46,9 @@ public class CustomerBeanTest {
     }
 
     @Test
-    public void should_be_deployed() {
-        Assert.assertNotNull(customerBean);
+	public void addCustomerTest() {
+		browser.get(deploymentUrl.toExternalForm() + "customer/search.xhtml");
+		String pageTitle = browser.getTitle();
+		assertEquals("Search Customer entities", pageTitle);
     }
 }
