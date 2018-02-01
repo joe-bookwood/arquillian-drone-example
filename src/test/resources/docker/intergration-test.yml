@@ -1,0 +1,5 @@
+wildfly10:
+  buildImage:
+    dockerfileLocation: src/test/resources/docker/wildfly
+    noCache: true
+    remove: true

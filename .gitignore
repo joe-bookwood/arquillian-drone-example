@@ -10,6 +10,12 @@ buildNumber.properties
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
+<<<<<<< HEAD
 /.settings/
 /.classpath
 /.project
+=======
+/.classpath
+/.project
+/.settings/
+>>>>>>> branch 'master' of git@github.com:joe-bookwood/arquillian-drone-example.git
