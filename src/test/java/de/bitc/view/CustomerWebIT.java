@@ -13,14 +13,16 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import de.bitc.model.Customer;
 
+@Ignore
 @RunWith(Arquillian.class)
-public class CustomerWebTest {
+public class CustomerWebIT {
 
     private static final String WEBAPP_SRC = "src/main/webapp";
     private static final String WEBAPP_SRC_CUSTOMER = "src/main/webapp/customer";
