@@ -2,8 +2,9 @@
 # Arquillian Drone Sample Project
 
 This project should be a sample how to create an integration test with
-Arquillian. I created the example project with jboss forge. I described the 
-steps below.
+Arquillian. The integration test shoul start a wild fly docker container and
+runs a selenium webdriver and a JPA test on it. I created the example project
+with jboss forge. I described the steps below.
 
 The project does not work now, and I posted the following text as an issue.
 
