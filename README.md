@@ -45,7 +45,7 @@ but it fails with:
 	Caused by: java.lang.IllegalArgumentException: Current configuration file does not contain image nor buildImage parameter and one of both should be provided.
 
 It seems, the reason is `INFORMATION: Key: [buildImage] is not implemented in Cube.`,
-but why arquillian cube should doesn't know buildImage? It's 
+but why arquillian cube should doesn't know buildImage? The keyword is described in the documentation
 
 
 ## Jboss Forge Steps
