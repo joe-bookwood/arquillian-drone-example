@@ -3,3 +3,10 @@ wildfly10:
     dockerfileLocation: src/test/resources/docker/wildfly
     noCache: true
     remove: true
+  exposedPorts: [8080/tcp, 9990/tcp]
+  await:
+    strategy: polling
+    iterations: 100
+    sleepPollingTime: 100
+  portBindings: [8080/tcp, 9990/tcp]
+  

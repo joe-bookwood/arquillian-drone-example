@@ -9,6 +9,7 @@
     <url>git@github.com:joe-bookwood/arquillian-drone-example.git</url>
   </scm>
   <properties>
+    <arquillian.cube.autostart />
     <failOnMissingWebXml>false</failOnMissingWebXml>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -113,6 +114,7 @@
             <configuration>
               <systemPropertyVariables>
                 <arquillian.launch>wildfly10</arquillian.launch>
+                <java.util.logging.manager>rg.jboss.logmanager.LogManager</java.util.logging.manager>
               </systemPropertyVariables>
             </configuration>
           </plugin>
