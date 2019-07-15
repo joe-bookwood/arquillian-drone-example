@@ -16,23 +16,23 @@ import de.bitc.model.Customer;
 @RunWith(Arquillian.class)
 public class CustomerDaoIT {
 
-	@Inject
-	private CustomerDao customerDao;
+    @Inject
+    private CustomerDao customerDao;
 
-	@Deployment(testable = true)
-	public static JavaArchive createDeployment() {
-	    JavaArchive javaArchive = ShrinkWrap
-				.create(JavaArchive.class,"dao-test.jar")
-				.addClasses(CustomerDao.class,Customer.class)
-				.addAsManifestResource("META-INF/persistence.xml",
-						"persistence.xml")
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-		 System.out.println(javaArchive.toString(true));
-		 return javaArchive;
-	}
+    @Deployment(testable = true)
+    public static JavaArchive createDeployment() {
+        JavaArchive javaArchive = ShrinkWrap
+                .create(JavaArchive.class,"dao-test.jar")
+                .addClasses(CustomerDao.class,Customer.class)
+                .addAsManifestResource("META-INF/persistence.xml",
+                        "persistence.xml")
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+        System.out.println(javaArchive.toString(true));
+        return javaArchive;
+    }
 
-	@Test
-	public void should_be_deployed() {
-		Assert.assertNotNull(customerDao);
-	}
+    @Test
+    public void should_be_deployed() {
+        Assert.assertNotNull(customerDao);
+    }
 }

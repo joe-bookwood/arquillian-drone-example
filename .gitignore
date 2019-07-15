@@ -19,3 +19,4 @@ buildNumber.properties
 /.project
 /.settings/
 >>>>>>> branch 'master' of git@github.com:joe-bookwood/arquillian-drone-example.git
+/.tern-project
