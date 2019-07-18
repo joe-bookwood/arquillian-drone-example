@@ -30,11 +30,11 @@ public class CustomerWebIT {
     private static final String WEBAPP_TEST_SRC = "src/test/webapp";
 
 
-	@Drone
-	private WebDriver browser;
+    @Drone
+    private WebDriver browser;
 
-	@ArquillianResource
-	private URL deploymentUrl;
+    @ArquillianResource
+    private URL deploymentUrl;
 
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
@@ -48,9 +48,9 @@ public class CustomerWebIT {
     }
 
     @Test
-	public void addCustomerTest() {
-		browser.get(deploymentUrl.toExternalForm() + "customer/search.xhtml");
-		String pageTitle = browser.getTitle();
-		assertEquals("Search Customer entities", pageTitle);
+    public void addCustomerTest() {
+        browser.get(deploymentUrl.toExternalForm() + "customer/search.xhtml");
+        String pageTitle = browser.getTitle();
+        assertEquals("Search Customer entities", pageTitle);
     }
 }

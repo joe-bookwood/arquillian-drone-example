@@ -19,7 +19,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <version.arquillian_cube>1.18.2</version.arquillian_cube>
     <version.junit>4.12</version.junit>
-    <browser>chrome</browser>
+    <browser>firefox</browser>
   </properties>
   <build>
     <finalName>arquillian-drone-example</finalName>
@@ -180,6 +180,12 @@
       <version>2.5.1</version>
       <type>pom</type>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.arquillian.container</groupId>
+      <artifactId>arquillian-container-chameleon</artifactId>
+      <scope>test</scope>
+      <version>1.0.0.CR6</version>
     </dependency>
     <dependency>
       <groupId>org.jboss.arquillian.graphene</groupId>
