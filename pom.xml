@@ -212,6 +212,7 @@
               <systemPropertyVariables>
                 <arquillian.launch>arquillian-wildfly-remote</arquillian.launch>
                 <chameleon.target>wildfly:10.1.0.Final:REMOTE</chameleon.target>
+                <browser>firefox</browser>
               </systemPropertyVariables>
             </configuration>
             <executions>

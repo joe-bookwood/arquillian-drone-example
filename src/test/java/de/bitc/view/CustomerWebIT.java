@@ -13,14 +13,12 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import de.bitc.model.Customer;
 
-@Ignore
 @RunWith(Arquillian.class)
 public class CustomerWebIT {
 
@@ -43,13 +41,14 @@ public class CustomerWebIT {
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebResource(new File(WEBAPP_SRC_CUSTOMER, "search.xhtml"))
                 .addAsWebResource(new File(WEBAPP_SRC_TEMPLATE, "pageTemplate.xhtml"))
-                .addAsWebInfResource(new StringAsset("<faces-config version=\"2.2\"/>"), "faces-config.xml")
+                .addAsWebInfResource(new StringAsset("<faces-config version=\"2.3\"/>"), "faces-config.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
     @Test
     public void addCustomerTest() {
-        browser.get(deploymentUrl.toExternalForm() + "customer/search.xhtml");
+        String url = deploymentUrl.toExternalForm() + "customer/search.xhtml";
+        browser.get(url);
         String pageTitle = browser.getTitle();
         assertEquals("Search Customer entities", pageTitle);
     }
