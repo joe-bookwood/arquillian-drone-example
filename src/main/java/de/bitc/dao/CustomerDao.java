@@ -2,16 +2,19 @@ package de.bitc.dao;
 
 import java.util.List;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
 import de.bitc.model.Customer;
 
 /**
  * DAO for Customer
  */
 @Stateless
+@LocalBean
 public class CustomerDao {
 	@PersistenceContext(unitName = "sample")
 	private EntityManager em;

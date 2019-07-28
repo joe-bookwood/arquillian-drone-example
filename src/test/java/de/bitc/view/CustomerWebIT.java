@@ -10,17 +10,14 @@ import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import de.bitc.model.Customer;
 
-@Ignore
 @RunWith(Arquillian.class)
 public class CustomerWebIT {
 
@@ -30,27 +27,71 @@ public class CustomerWebIT {
     private static final String WEBAPP_TEST_SRC = "src/test/webapp";
 
 
-	@Drone
-	private WebDriver browser;
+    @Drone
+	private WebDriver driver;
 
-	@ArquillianResource
-	private URL deploymentUrl;
+    @ArquillianResource
+    private URL deploymentUrl;
 
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "web-test.war")
-                .addClasses(CustomerBean.class, Customer.class)
+        WebArchive warArchive = ShrinkWrap.create(WebArchive.class, "web-test.war")
+                .addClasses(CustomerBean.class, Customer.class, ViewUtils.class)
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
-                .addAsWebResource(new File(WEBAPP_SRC_CUSTOMER, "search.xhtml"))
-                .addAsWebResource(new File(WEBAPP_SRC_TEMPLATE, "pageTemplate.xhtml"))
-                .addAsWebInfResource(new StringAsset("<faces-config version=\"2.2\"/>"), "faces-config.xml")
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+                .addAsResource("META-INF/forge.taglib.xml", "META-INF/forge.taglib.xml")
+                .addAsWebResource(new File("src/main/webapp/resources/true.png"),"/resources/true.png")
+                .addAsWebResource(new File("src/main/webapp/resources/remove.png"),"/resources/remove.png")
+                .addAsWebResource(new File("src/main/webapp/resources/forge-style.css"),"/resources/forge-style.css")
+                .addAsWebResource(new File("src/main/webapp/resources/forge-logo.png"),"/resources/forge-logo.png")
+                .addAsWebResource(new File("src/main/webapp/resources/scaffold/pageTemplate.xhtml"),"/resources/scaffold/pageTemplate.xhtml")
+                .addAsWebResource(new File("src/main/webapp/resources/scaffold/paginator.xhtml"),"/resources/scaffold/paginator.xhtml")
+                .addAsWebResource(new File("src/main/webapp/resources/add.png"),"/resources/add.png")
+                .addAsWebResource(new File("src/main/webapp/resources/bootstrap.css"),"/resources/bootstrap.css")
+                .addAsWebResource(new File("src/main/webapp/resources/search.png"),"/resources/search.png")
+                .addAsWebResource(new File("src/main/webapp/resources/false.png"),"/resources/false.png")
+                .addAsWebResource(new File("src/main/webapp/resources/favicon.ico"),"/resources/favicon.ico")
+                .addAsWebResource(new File("src/main/webapp/resources/jboss-community.png"),"/resources/jboss-community.png")
+                .addAsWebResource(new File("src/main/webapp/error.xhtml"))
+                .addAsWebResource(new File("src/main/webapp/customer/view.xhtml"),"/customer/view.xhtml")
+                .addAsWebResource(new File("src/main/webapp/customer/create.xhtml"),"/customer/create.xhtml")
+                .addAsWebResource(new File("src/main/webapp/customer/search.xhtml"),"/customer/search.xhtml")
+                .addAsWebResource(new File("src/main/webapp/index.xhtml"))
+                .addAsWebResource(new File("src/main/webapp/index.html"))
+                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/faces-config.xml"), "faces-config.xml")
+                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/web.xml"), "web.xml")
+                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"), "beans.xml");
+        System.out.println(warArchive.toString(true));
+        return warArchive;
     }
 
     @Test
-	public void addCustomerTest() {
-		browser.get(deploymentUrl.toExternalForm() + "customer/search.xhtml");
-		String pageTitle = browser.getTitle();
-		assertEquals("Search Customer entities", pageTitle);
-    }
+    public void addCustomerTest() {
+        String url = deploymentUrl.toExternalForm() + "customer/search.xhtml";
+		driver.get(url);
+		String pageTitle = driver.getTitle();
+        assertEquals("Search Customer entities", pageTitle);
+		url = deploymentUrl.toExternalForm();
+		driver.get(url);
+		driver.findElement(By.linkText("Customer")).click();
+		driver.findElement(By.linkText("Create New")).click();
+		driver.findElement(By.id("create:customerBeanCustomerFirstName")).click();
+		driver.findElement(By.id("create:customerBeanCustomerFirstName")).clear();
+		String firstName = "Max";
+		String lastName = "Mustermann";
+		String login = "max";
+		String email = "max@example.com";
+		addCustomer(firstName, lastName, login, email);
+
+	}
+
+	private void addCustomer(String firstName, String lastName, String login, String email) {
+		driver.findElement(By.id("create:customerBeanCustomerFirstName")).sendKeys(firstName);
+		driver.findElement(By.id("create:customerBeanCustomerLastName")).clear();
+		driver.findElement(By.id("create:customerBeanCustomerLastName")).sendKeys(lastName);
+		driver.findElement(By.id("create:customerBeanCustomerEmail")).clear();
+		driver.findElement(By.id("create:customerBeanCustomerEmail")).sendKeys(email);
+		driver.findElement(By.id("create:customerBeanCustomerLogin")).clear();
+		driver.findElement(By.id("create:customerBeanCustomerLogin")).sendKeys(login);
+		driver.findElement(By.linkText("Save")).click();
+	}
 }
