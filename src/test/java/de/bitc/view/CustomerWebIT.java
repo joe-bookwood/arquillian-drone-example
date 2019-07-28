@@ -13,6 +13,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import de.bitc.model.Customer;
@@ -27,7 +28,7 @@ public class CustomerWebIT {
 
 
     @Drone
-    private WebDriver browser;
+	private WebDriver driver;
 
     @ArquillianResource
     private URL deploymentUrl;
@@ -66,8 +67,31 @@ public class CustomerWebIT {
     @Test
     public void addCustomerTest() {
         String url = deploymentUrl.toExternalForm() + "customer/search.xhtml";
-        browser.get(url);
-        String pageTitle = browser.getTitle();
+		driver.get(url);
+		String pageTitle = driver.getTitle();
         assertEquals("Search Customer entities", pageTitle);
-    }
+		url = deploymentUrl.toExternalForm();
+		driver.get(url);
+		driver.findElement(By.linkText("Customer")).click();
+		driver.findElement(By.linkText("Create New")).click();
+		driver.findElement(By.id("create:customerBeanCustomerFirstName")).click();
+		driver.findElement(By.id("create:customerBeanCustomerFirstName")).clear();
+		String firstName = "Max";
+		String lastName = "Mustermann";
+		String login = "max";
+		String email = "max@example.com";
+		addCustomer(firstName, lastName, login, email);
+
+	}
+
+	private void addCustomer(String firstName, String lastName, String login, String email) {
+		driver.findElement(By.id("create:customerBeanCustomerFirstName")).sendKeys(firstName);
+		driver.findElement(By.id("create:customerBeanCustomerLastName")).clear();
+		driver.findElement(By.id("create:customerBeanCustomerLastName")).sendKeys(lastName);
+		driver.findElement(By.id("create:customerBeanCustomerEmail")).clear();
+		driver.findElement(By.id("create:customerBeanCustomerEmail")).sendKeys(email);
+		driver.findElement(By.id("create:customerBeanCustomerLogin")).clear();
+		driver.findElement(By.id("create:customerBeanCustomerLogin")).sendKeys(login);
+		driver.findElement(By.linkText("Save")).click();
+	}
 }
