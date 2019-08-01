@@ -6,10 +6,10 @@ Arquillian. The integration test should start a wildfly docker container and
 runs a selenium webdriver and a JPA test on it. I created the example project
 with jboss forge. I described the steps below.
 
-The project does not work now, and I posted the following text as an issue.
+The project work without docker and Java 8, and I posted the following text as an issue.
 
 The first test is a JPA dao test `de.bitc.dao.CustomerDaoIT`. I want that the 
-test build and deploy a customized wildfly 10 docker container and run the test
+test build and deploy a customized wildfly 17 docker container and run the test
 in it. I followed the
 [Building containers](http://arquillian.org/arquillian-cube/#_building_containers)
 example in the Arquillian Cube documentation. 
@@ -20,7 +20,8 @@ I start the test with:
 
 
 ## Jboss Forge Steps
-The following commands are needed to setup this example project
+
+The following commands used to create this prototype (late 2016, all dependency versions increased to 2019)
 
 	project-new --named arquillian-drone-example --version 2.5.0 --top-level-package de.bitc --stack JAVA_EE_7
 	jpa-setup --jpa-container WILDFLY --persistence-unit-name sample --jpa-provider Hibernate --db-type H2 --data-source-name  java:jboss/datasources/ExampleDS
