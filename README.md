@@ -6,6 +6,14 @@ Arquillian. The integration test should start a wildfly docker container and
 runs a selenium webdriver and a JPA test on it. I created the example project
 with jboss forge. I described the steps below.
 
+**This project is under refactoring** 
+
+* Im extend it with Junit5 (done)
+* The poject should be converted into a jigsaw modular project for Java 11 and above
+* The tests should be run under Java 11 and above
+
+The following is outdated!
+
 The project work without docker and Java 8, and I posted the following text as an issue.
 
 The first test is a JPA dao test `de.bitc.dao.CustomerDaoIT`. I want that the 
