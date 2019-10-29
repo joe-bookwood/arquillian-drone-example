@@ -8,7 +8,8 @@ with jboss forge. I described the steps below.
 
 **This project is under refactoring** 
 
-* Im extend it with Junit5 (done)
+* Extend the tests with Junit5 (done)
+* Add new Arquillian-Cube configuration
 * The poject should be converted into a jigsaw modular project for Java 11 and above
 * The tests should be run under Java 11 and above
 
