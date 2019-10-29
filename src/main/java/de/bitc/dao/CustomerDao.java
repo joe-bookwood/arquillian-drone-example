@@ -16,38 +16,38 @@ import de.bitc.model.Customer;
 @Stateless
 @LocalBean
 public class CustomerDao {
-	@PersistenceContext(unitName = "sample")
-	private EntityManager em;
+    @PersistenceContext(unitName = "sample")
+    private EntityManager em;
 
-	public void create(Customer entity) {
-		em.persist(entity);
-	}
+    public void create(Customer entity) {
+        em.persist(entity);
+    }
 
-	public void deleteById(Long id) {
-		Customer entity = em.find(Customer.class, id);
-		if (entity != null) {
-			em.remove(entity);
-		}
-	}
+    public void deleteById(Long id) {
+        Customer entity = em.find(Customer.class, id);
+        if (entity != null) {
+            em.remove(entity);
+        }
+    }
 
-	public Customer findById(Long id) {
-		return em.find(Customer.class, id);
-	}
+    public Customer findById(Long id) {
+        return em.find(Customer.class, id);
+    }
 
-	public Customer update(Customer entity) {
-		return em.merge(entity);
-	}
+    public Customer update(Customer entity) {
+        return em.merge(entity);
+    }
 
-	public List<Customer> listAll(Integer startPosition, Integer maxResult) {
-		TypedQuery<Customer> findAllQuery = em.createQuery(
-				"SELECT DISTINCT c FROM Customer c ORDER BY c.id",
-				Customer.class);
-		if (startPosition != null) {
-			findAllQuery.setFirstResult(startPosition);
-		}
-		if (maxResult != null) {
-			findAllQuery.setMaxResults(maxResult);
-		}
-		return findAllQuery.getResultList();
-	}
+    public List<Customer> listAll(Integer startPosition, Integer maxResult) {
+        TypedQuery<Customer> findAllQuery = em.createQuery(
+                "SELECT DISTINCT c FROM Customer c ORDER BY c.id",
+                Customer.class);
+        if (startPosition != null) {
+            findAllQuery.setFirstResult(startPosition);
+        }
+        if (maxResult != null) {
+            findAllQuery.setMaxResults(maxResult);
+        }
+        return findAllQuery.getResultList();
+    }
 }
