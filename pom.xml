@@ -267,7 +267,6 @@
           <groupId>org.arquillian.cube</groupId>
           <artifactId>arquillian-cube-docker</artifactId>
           <scope>test</scope>
-          <type>pom</type>
         </dependency>
       </dependencies>
     </profile>

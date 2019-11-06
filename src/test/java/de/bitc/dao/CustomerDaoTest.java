@@ -1,6 +1,5 @@
 package de.bitc.dao;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -29,12 +28,13 @@ class CustomerDaoTest {
 
     private CustomerDao customerDao;
 
+    @Mock
     private Customer customer;
 
     @BeforeEach
     void setUp() throws Exception {
         customerDao = new CustomerDao();
-        customer = mock(Customer.class);
+        //customer = mock(Customer.class);
 
         // em is a private field and there is no setter
         FieldSetter.setField(customerDao, customerDao.getClass().getDeclaredField("em"), entityManager);

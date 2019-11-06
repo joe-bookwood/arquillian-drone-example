@@ -25,6 +25,6 @@
     <property name="serverVersion">1.27</property>
     <property name="definitionFormat">CUBE</property>
     <property name="serverUri">tcp://${docker.server}:4243</property>
-    <property name="dockerContainersFile">src/test/resources/docker/intergration-test.yml</property>
+    <property name="dockerContainersFile">src/test/resources/docker/docker-compose.yml</property>
   </extension>
 </arquillian>
