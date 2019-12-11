@@ -1,12 +1,23 @@
-wildfly10:
-  buildImage:
-    dockerfileLocation: src/test/resources/docker/wildfly
-    noCache: true
-    remove: true
-  exposedPorts: [8080/tcp, 9990/tcp]
-  await:
-    strategy: polling
-    iterations: 100
-    sleepPollingTime: 100
-  portBindings: [8080/tcp, 9990/tcp]
-  
+version: '2'
+
+volumes:
+  dbtest:
+    driver: local
+
+services:
+  postgresql:
+    build: postgresql
+    ports:
+      - 127.0.0.1:5432:5432
+    volumes:
+      - dbtest:/var/lib/postgresql/data
+
+  wildfly10:
+    build: wildfly
+    ports:
+    - "8080:8080"
+    - "9990:9990"
+    depends_on:
+      - postgresql
+
+
